@@ -24,8 +24,8 @@ export function ExpandableNavbar() {
           "[transition-property:width,height,background-color,border-color,box-shadow] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]",
           isOpen
             ? "h-[280px] w-[52rem] bg-black/85 shadow-[0_24px_72px_rgba(0,0,0,0.5)] [transition-delay:0ms,280ms,0ms,0ms,0ms] [transition-duration:520ms,620ms,320ms,320ms,520ms] max-sm:h-[274px]"
-            : "h-[52px] w-[470px] [transition-delay:300ms,0ms,120ms,120ms,0ms] [transition-duration:460ms,360ms,220ms,220ms,320ms] max-sm:h-[50px] max-sm:w-[min(calc(100vw_-_2rem),340px)]",
-          "max-w-[calc(100vw_-_2rem)]",
+            : "h-[52px] w-[470px] [transition-delay:300ms,0ms,120ms,120ms,0ms] [transition-duration:460ms,360ms,220ms,220ms,320ms] max-sm:h-[50px] max-sm:w-[min(calc(100vw_-_2.5rem),340px)]",
+          "max-w-[calc(100vw_-_2.5rem)]",
         ].join(" ")}
       >
         <button
@@ -36,20 +36,20 @@ export function ExpandableNavbar() {
           onClick={() => setIsOpen((open) => !open)}
         >
           <span
-            className="relative size-8 justify-self-start rounded-full border border-fuchsia-200/45 bg-white/5 shadow-[0_0_24px_rgba(217,70,239,0.2)]"
+            className="relative size-8 justify-self-start rounded-full border border-white/25 bg-white/5"
             aria-hidden="true"
           >
-            <span className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-200" />
+            <span className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" />
             <span className="absolute left-1 top-1 size-1.5 rounded-full bg-white/80" />
           </span>
 
-          <span className="justify-self-center text-base font-black uppercase tracking-[0.14em] text-white">
-            DIKCHYA
+          <span className="justify-self-center font-display font-semibold tracking-tight text-xl text-white">
+            Dikchya
           </span>
 
           <span
             className={[
-              "group/menu relative grid size-9 justify-self-end place-items-center rounded-[4px] text-white/85 transition hover:text-fuchsia-200",
+              "group/menu relative grid size-9 justify-self-end place-items-center rounded-[4px] text-white/85 transition hover:text-accent",
               isOpen ? "text-white" : "",
             ].join(" ")}
           >
@@ -77,7 +77,7 @@ export function ExpandableNavbar() {
         <div
           id="site-menu"
           className={[
-            "mx-4 border-t border-purple-300/70 py-5 transition-[opacity,transform] duration-500 ease-out",
+            "mx-4 border-t border-white/15 py-5 transition-[opacity,transform] duration-500 ease-out",
             isOpen
               ? "translate-y-0 opacity-100"
               : "-translate-y-2 opacity-0 delay-0",
@@ -93,7 +93,7 @@ export function ExpandableNavbar() {
               >
                 <span className="relative z-10">{item.label}</span>
                 <span
-                  className="relative z-10 h-px w-10 scale-x-0 bg-fuchsia-200/80 transition-transform duration-300 group-hover/navlink:scale-x-100"
+                  className="relative z-10 h-px w-10 scale-x-0 bg-accent/80 transition-transform duration-300 group-hover/navlink:scale-x-100"
                   aria-hidden="true"
                 />
               </Link>

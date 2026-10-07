@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  landingExitDistance,
-  landingScrollDistance,
-} from "../data/constants";
+
+export const landingScrollDistance = 1500;
+export const landingExitDistance = 650;
 
 export function usePortfolioMotion() {
   const [progress, setProgress] = useState(0);
@@ -24,11 +23,19 @@ export function usePortfolioMotion() {
 
     let rafId: number;
     let isAnimating = false;
+    let lastFrameTime = 0;
 
-    const updateMotion = () => {
+    const updateMotion = (time = performance.now()) => {
+      // Ease toward the real scroll position at the same speed on any refresh rate
+      // (~20% of the remaining distance per 60fps frame), so the landing keeps up
+      // with the page content scrolling underneath it.
+      const elapsed = lastFrameTime ? Math.min(time - lastFrameTime, 64) : 16.67;
+      lastFrameTime = time;
+      const ease = 1 - Math.pow(1 - 0.2, elapsed / 16.67);
+
       const diff = scrollTargetY.current - scrollCurrentY.current;
-      if (Math.abs(diff) > 0.05) {
-        scrollCurrentY.current += diff * 0.08;
+      if (Math.abs(diff) > 0.5) {
+        scrollCurrentY.current += diff * ease;
         isAnimating = true;
       } else {
         scrollCurrentY.current = scrollTargetY.current;
@@ -72,6 +79,8 @@ export function usePortfolioMotion() {
 
       if (isAnimating) {
         rafId = requestAnimationFrame(updateMotion);
+      } else {
+        lastFrameTime = 0;
       }
     };
 

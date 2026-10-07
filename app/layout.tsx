@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
+
+import { SiteFooter } from "@/components/navigation/siteFooter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,10 +14,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Dikchya | Creative Portfolio",
+  title: "Dikchya Rai — UI/UX Designer",
   description:
-    "A minimal glassmorphism portfolio for an undergraduate design technologist.",
+    "Portfolio of Dikchya Rai, a UI/UX designer and IT student based in Kathmandu, Nepal.",
 };
 
 export default function RootLayout({
@@ -26,9 +33,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
